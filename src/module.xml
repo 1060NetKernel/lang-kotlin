@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="2.0">
+	<meta>
+		<identity>
+			<uri>urn:org:netkernel:lang:kotlin</uri>
+			<version>1.0.0</version>
+		</identity>
+		<info>
+			<name>Lang / Kotlin</name>
+			<description>Run Kotlin Script</description>
+		</info>
+	</meta>
+	<system>
+		<classloader>
+			<exports>
+		        <match>jet\..*</match>
+		        <match>kotlin\..*</match>
+			</exports>
+		</classloader>
+		<dynamic/>
+	</system>
+
+	<rootspace>
+		<accessor>
+			<id>kotlin:test</id>
+			<grammar>res:/test/kotlin</grammar>
+			<class>org.netkernel.lang.kotlin.test.TestAccessor</class>
+		</accessor>
+		<accessor>
+			<id>kotlin:runtime</id>
+			<grammar>
+				<active>
+					<identifier>active:kotlin</identifier>
+					<argument name="operator"/>
+					<varargs/>
+				</active>
+			</grammar>
+			<class>org.netkernel.lang.kotlin.KotlinRuntime</class>
+		</accessor>
+		<transreptor>
+			<class>org.netkernel.lang.kotlin.KotlinScriptCompiler</class>
+		</transreptor>
+		<representation>
+			<class>org.netkernel.lang.kotlin.KotlinScriptRepresentation</class>
+		</representation>
+	</rootspace>
+</module>
