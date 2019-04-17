@@ -9,6 +9,10 @@ import kotlin.script.experimental.api.providedProperties
 import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
 
 class ScriptRuntimeAccessor: StandardAccessorImpl() {
+    init {
+        this.declareThreadSafe()
+    }
+
     override fun onSource(context: INKFRequestContext?) {
         checkNotNull(context)
 
