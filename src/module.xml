@@ -35,13 +35,13 @@
 					<varargs/>
 				</active>
 			</grammar>
-			<class>org.netkernel.lang.kotlin.KotlinRuntime</class>
+			<class>org.netkernel.lang.kotlin.ScriptRuntimeAccessor</class>
 		</accessor>
 		<transreptor>
-			<class>org.netkernel.lang.kotlin.KotlinScriptCompiler</class>
+			<class>org.netkernel.lang.kotlin.ScriptTransreptor</class>
 		</transreptor>
 		<representation>
-			<class>org.netkernel.lang.kotlin.KotlinScriptRepresentation</class>
+			<class>org.netkernel.lang.kotlin.ScriptRepresentation</class>
 		</representation>
 	</rootspace>
 </module>
