@@ -3,6 +3,8 @@ A Kotlin language runtime module for NetKernel.
 
 ## Example Scripts
 
+### Classic NKF
+
 `res:/experiment/one.nk.kts`:
 ```kotlin
 val req = context.createRequest("active:kotlin")
@@ -17,6 +19,34 @@ context.createResponseFrom(context.issueRequestForResponse(req))
 val recipient = context.source("arg:recipient", String::class.java)
 
 context.createResponseFrom("Hello $recipient")
+```
+
+Running `active:kotlin+operator@res:/experiment/one.nk.kts` will result in:
+```
+Hello world
+```
+
+### DSL
+
+`res:/experiment/one.nk.kts`:
+
+```kotlin
+createResponseFrom {
+    issue {
+        request("active:kotlin") {
+            addArgument("operator", "res:/experiment/two.nk.kts")
+            addArgumentByValue("recipient", "world")
+        }
+    }
+}
+```
+
+`res:/experiment/two.nk.kts`:
+
+```kotlin
+val recipient = source<String>("arg:recipient")
+
+createResponseFrom("Hello $recipient")
 ```
 
 Running `active:kotlin+operator@res:/experiment/one.nk.kts` will result in:
