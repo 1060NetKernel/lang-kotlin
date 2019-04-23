@@ -33,8 +33,8 @@ Hello world
 ```kotlin
 response {
     source<String>("active:kotlin") {
-        addArgument("operator", "res:/experiment/two.nk.kts")
-        addArgumentByValue("recipient", "world")
+        argument("operator", sourceRequest<Any>("res:/experiment/two.nk.kts"))
+        argument("recipient", "world")
     }
 }
 ```
