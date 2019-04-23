@@ -54,6 +54,33 @@ Running `active:kotlin+operator@res:/experiment/one.nk.kts` will result in:
 Hello world
 ```
 
+#### Pass-by-request
+
+If you change `res:/experiment/three.nk.kts` to be:
+
+```kotlin
+createResponseFrom {
+    issue {
+        request("active:kotlin") {
+            addArgument("operator", "res:/experiment/two.nk.kts")
+            addArgugmentByRequest("recipient") {
+                request<Any>("active:toUpper") {
+                    addArgumentByValue("operand", "world")
+                }
+            }
+        }
+    }
+}
+```
+
+Then the result of `active:kotlin+operator@res:/experiment/one.nk.kts` will become:
+
+```
+Hello WORLD
+
+```
+ 
+
 ## IDE Code Completion
 
 ### IntelliJ
