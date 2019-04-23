@@ -56,7 +56,7 @@ Hello world
 
 #### Pass-by-request
 
-If you change `res:/experiment/three.nk.kts` to be:
+If you change `res:/experiment/one.nk.kts` to be:
 
 ```kotlin
 createResponseFrom {
