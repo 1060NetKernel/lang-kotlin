@@ -12,7 +12,7 @@ abstract class RequestContext(val context: INKFRequestContext) {
         return request
     }
 
-    inline fun <reified T> issue(request: () -> Request<String>): T {
+    inline fun <reified T> issue(request: () -> Request<T>): T {
         val response = context.issueRequest(request().rawRequest)
         check(response is T)
         return response

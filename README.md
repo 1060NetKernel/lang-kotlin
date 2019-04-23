@@ -33,7 +33,7 @@ Hello world
 ```kotlin
 createResponseFrom {
     issue {
-        request("active:kotlin") {
+        request<String>("active:kotlin") {
             addArgument("operator", "res:/experiment/two.nk.kts")
             addArgumentByValue("recipient", "world")
         }
@@ -61,7 +61,7 @@ If you change `res:/experiment/one.nk.kts` to be:
 ```kotlin
 createResponseFrom {
     issue {
-        request("active:kotlin") {
+        request<String>("active:kotlin") {
             addArgument("operator", "res:/experiment/two.nk.kts")
             addArgugmentByRequest("recipient") {
                 request<Any>("active:toUpper") {
