@@ -11,14 +11,14 @@ val req = context.createRequest("active:kotlin")
 req.addArgument("operator", "res:/experiment/two.nk.kts")
 req.addArgumentByValue("recipient", "world")
 
-context.createResponseFrom(context.issueRequestForResponse(req))
+context.response(context.issueRequestForResponse(req))
 ```
 
 `res:/experiment/two.nk.kts`:
 ```kotlin
 val recipient = context.source("arg:recipient", String::class.java)
 
-context.createResponseFrom("Hello $recipient")
+context.response("Hello $recipient")
 ```
 
 Running `active:kotlin+operator@res:/experiment/one.nk.kts` will result in:
@@ -31,12 +31,10 @@ Hello world
 `res:/experiment/one.nk.kts`:
 
 ```kotlin
-createResponseFrom {
-    issue {
-        request<String>("active:kotlin") {
-            addArgument("operator", "res:/experiment/two.nk.kts")
-            addArgumentByValue("recipient", "world")
-        }
+response {
+    source<String>("active:kotlin") {
+        addArgument("operator", "res:/experiment/two.nk.kts")
+        addArgumentByValue("recipient", "world")
     }
 }
 ```
@@ -44,9 +42,10 @@ createResponseFrom {
 `res:/experiment/two.nk.kts`:
 
 ```kotlin
-val recipient = source<String>("arg:recipient")
-
-createResponseFrom("Hello $recipient")
+response {
+    val recipient = source<String>("arg:recipient")
+    "Hello $recipient"
+}
 ```
 
 Running `active:kotlin+operator@res:/experiment/one.nk.kts` will result in:
@@ -59,14 +58,12 @@ Hello world
 If you change `res:/experiment/one.nk.kts` to be:
 
 ```kotlin
-createResponseFrom {
-    issue {
-        request<String>("active:kotlin") {
-            addArgument("operator", "res:/experiment/two.nk.kts")
-            addArgugmentByRequest("recipient") {
-                request<Any>("active:toUpper") {
-                    addArgumentByValue("operand", "world")
-                }
+response {
+    source<String>("active:kotlin") {
+        argument("operator", sourceRequest<Any>("res:/experiment/two.nk.kts"))
+        argument("recipient") {
+            sourceRequest<Any>("active:toUpper") {
+                argument("operand", "world")
             }
         }
     }
